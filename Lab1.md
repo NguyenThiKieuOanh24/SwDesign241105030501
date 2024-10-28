@@ -63,7 +63,7 @@
 ![](https://www.planttext.com/api/plantuml/png/UhzxVq1YPMvgNacefuAkdGAKuvoVLrAKdvEJMgHWfP2UMW8LzinBozVGvC9K1DJfNvG2KmrckgIM96Rc5EDI3XK4QYWeoazEBIw62Y3Kut9EQK5AOabgS4bYIIaXqu5-ib98oImko4ciX0e5fHQNve1i0G000F__0m00)
     
   * Nhiệm vụ của từng lớp phân tích
-    -PaymentUI: Nhận đầu vào từ người dùng và hiển thị kết quả thanh toán.
+    - PaymentUI: Nhận đầu vào từ người dùng và hiển thị kết quả thanh toán.
     - PaymentController: Điều phối toàn bộ quá trình thanh toán và tương tác với các lớp Payment và Order.
     - Payment: Lưu trữ và cập nhật thông tin thanh toán.
     - Order: Cung cấp thông tin về đơn hàng.
