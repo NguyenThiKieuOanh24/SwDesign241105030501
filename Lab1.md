@@ -75,10 +75,10 @@
     
 ![](https://www.planttext.com/api/plantuml/png/T591JiCm4Bpx5Nk4GpuGeQg8NY8XKL7n01DlMqksD_AkWoh4opZm9Bw0qrf9MrBVTcPsFRFsx_VFaaL7ITwfrcbcMEk3no1l3NmgoAU27Ke1cx2bktkeeITh2ciiTquVYk8LEJcPD5_gSkmJ1Oda7CPnV1UfHUOYkDqwDcXFAPSr64hl3WlgKVPaChgHQCEke3cS9Bv6KsUquER8NUTXtUDitD7FIpHdzccecbLMsI054nBj7cTjMa4_-7csB0zDBXRJbe-3LoZQEhwuTtgJgbhChBA6nCZgFt4cFnd4g5jX-B2olo4_fQiXOjuOziYvRKkmZUILMc8mmrVv0m00__y30000)
 
-   *Giải thích:
-     + PaymentUI kết nối với PaymentController để điều phối thông tin đầu vào và hiển thị kết quả.
-     + aymentController điều phối thông tin thanh toán giữa Payment và Order.
-     + Order lưu giữ thông tin chi tiết về đơn hàng và được PaymentController gọi để lấy thông tin khi cần thiết.
+    * Giải thích:
+    - PaymentUI kết nối với PaymentController để điều phối thông tin đầu vào và hiển thị kết quả.
+    - PaymentController điều phối thông tin thanh toán giữa Payment và Order.
+    - Order lưu giữ thông tin chi tiết về đơn hàng và được PaymentController gọi để lấy thông tin khi cần thiết.
     
 4. Phân tích ca sử dụng Maintain Timecard
    
