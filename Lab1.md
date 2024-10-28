@@ -41,22 +41,22 @@
       + Mô tả: Lớp này đại diện cho thông tin thanh toán.
       + Nhiệm vụ: Lưu trữ thông tin thanh toán, chẳng hạn như số tiền, phương thức thanh toán và trạng thái thanh toán.
       + Các thuộc tính:
-          amount: Số tiền thanh toán.
-          method: Phương thức thanh toán.
-          status: Trạng thái của thanh toán (ví dụ: thành công, thất bại).
+          - amount: Số tiền thanh toán.
+          - method: Phương thức thanh toán.
+          - status: Trạng thái của thanh toán (ví dụ: thành công, thất bại).
       + Phương thức chính:
-          updateStatus(): Cập nhật trạng thái thanh toán.
-          savePaymentInfo(): Lưu thông tin thanh toán.
+          - updateStatus(): Cập nhật trạng thái thanh toán.
+          - savePaymentInfo(): Lưu thông tin thanh toán.
     
     - Entity Class: Order
       + Mô tả: Lớp này đại diện cho đơn hàng mà khách hàng đang thanh toán.
       + Nhiệm vụ: Lưu trữ thông tin chi tiết của đơn hàng.
       + Các thuộc tính:
-          orderID: ID của đơn hàng.
-          totalAmount: Tổng số tiền của đơn hàng.
-          items: Danh sách các mặt hàng trong đơn hàng.
+          - orderID: ID của đơn hàng.
+          - totalAmount: Tổng số tiền của đơn hàng.
+          - items: Danh sách các mặt hàng trong đơn hàng.
       + Phương thức chính:
-          getOrderDetails(): Lấy thông tin chi tiết của đơn hàng.
+          - getOrderDetails(): Lấy thông tin chi tiết của đơn hàng.
         
   * Biểu đồ sequence
     
@@ -74,12 +74,14 @@
   * các biểu đồ lớp
     
 ![](https://www.planttext.com/api/plantuml/png/T591JiCm4Bpx5Nk4GpuGeQg8NY8XKL7n01DlMqksD_AkWoh4opZm9Bw0qrf9MrBVTcPsFRFsx_VFaaL7ITwfrcbcMEk3no1l3NmgoAU27Ke1cx2bktkeeITh2ciiTquVYk8LEJcPD5_gSkmJ1Oda7CPnV1UfHUOYkDqwDcXFAPSr64hl3WlgKVPaChgHQCEke3cS9Bv6KsUquER8NUTXtUDitD7FIpHdzccecbLMsI054nBj7cTjMa4_-7csB0zDBXRJbe-3LoZQEhwuTtgJgbhChBA6nCZgFt4cFnd4g5jX-B2olo4_fQiXOjuOziYvRKkmZUILMc8mmrVv0m00__y30000)
+
    *Giải thích:
     - PaymentUI kết nối với PaymentController để điều phối thông tin đầu vào và hiển thị kết quả.
     - aymentController điều phối thông tin thanh toán giữa Payment và Order.
     - Order lưu giữ thông tin chi tiết về đơn hàng và được PaymentController gọi để lấy thông tin khi cần thiết.
     
 4. Phân tích ca sử dụng Maintain Timecard
+   
    * Các lớp phân tích cho ca sử dụng Maintain Timecard
     - Boundary Class: TimecardUI
       + Mô tả: Quản lý giao diện người dùng để nhập và hiển thị thông tin bảng chấm công.
@@ -108,21 +110,21 @@
     - Employee: Xác minh danh tính nhân viên dựa trên ID được nhập từ TimecardController.
       
   * Một số thuộc tính và quan hệ giữa các lớp phân tích
-    - TimecardUI
+    - TimecardUI:
       + Phương thức: enterTimecardData(), displaySaveResult()
-    - TimecardController
+    - TimecardController:
       + Phương thức: submitTimecardData(), verifyEmployee(), saveTimecardData()
-    - Timecard
+    - Timecard:
       + Thuộc tính: date, hoursWorked, status
       + Phương thức: saveTimecardData()
-    - Employee
+    - Employee:
       + Thuộc tính: employeeID, name, position
       + Phương thức: verifyEmployee()
   * các biểu đồ lớp
     
 ![](https://www.planttext.com/api/plantuml/png/Z59BJiCm4Dtx55xIHIwG1Qf4MNHBGQoTUA0ZR4_a6GT55ITZmP6u0eOwQHLIX9VlCs_yxC_tZpMBYPAyKwqppFeUFRGcseUjFYYTJwKX2CGHtnWnLojTwvxG5e55xfmPTgQ7E-3av2HuKxEvDnGaadCGf_cS6e_oLq0F4P-6Mzyv6W1-s8R8ZVwSk-p-bJvbMYEGLLaE1TbJYln8yGLi9YobnerKhaWIPtGd4SFp_sF7ZKzL5c2xoLeCKk1WFCp7TyGeI66EN-eYXvwzNLLTBrLUwyJ0Qe4vDnntWsXQOVsAihzacEvN7zT2A7grXc2_FzKN0000__y30000)
 
-  *Giải thích:
+  * Giải thích:
     - TimecardUI:
       +  Là lớp giao diện người dùng, có nhiệm vụ nhận dữ liệu từ người dùng và hiển thị kết quả lưu trữ.
       + Phương thức chính là enterTimecardData() để nhập thông tin chấm công và displaySaveResult() để hiển thị kết quả.
