@@ -59,7 +59,9 @@
           getOrderDetails(): Lấy thông tin chi tiết của đơn hàng.
         
   * Biểu đồ sequence
+    
     ![](https://www.planttext.com/api/plantuml/png/UhzxVq1YPMvgNacefuAkdGAKuvoVLrAKdvEJMgHWfP2UMW8LzinBozVGvC9K1DJfNvG2KmrckgIM96Rc5EDI3XK4QYWeoazEBIw62Y3Kut9EQK5AOabgS4bYIIaXqu5-ib98oImko4ciX0e5fHQNve1i0G000F__0m00)
+    
   * Nhiệm vụ của từng lớp phân tích
     -PaymentUI: Nhận đầu vào từ người dùng và hiển thị kết quả thanh toán.
     - PaymentController: Điều phối toàn bộ quá trình thanh toán và tương tác với các lớp Payment và Order.
@@ -68,11 +70,79 @@
   * Một số thuộc tính và quan hệ giữa các lớp phân tích
     - Payment và Order có mối quan hệ một-nhiều: Một Order có thể chứa nhiều Payment cho các đơn hàng lớn thanh toán từng phần.
     - PaymentController đóng vai trò như trung gian, quản lý quá trình thanh toán giữa các lớp.
+      
   * các biểu đồ lớp
+    
 ![](https://www.planttext.com/api/plantuml/png/T591JiCm4Bpx5Nk4GpuGeQg8NY8XKL7n01DlMqksD_AkWoh4opZm9Bw0qrf9MrBVTcPsFRFsx_VFaaL7ITwfrcbcMEk3no1l3NmgoAU27Ke1cx2bktkeeITh2ciiTquVYk8LEJcPD5_gSkmJ1Oda7CPnV1UfHUOYkDqwDcXFAPSr64hl3WlgKVPaChgHQCEke3cS9Bv6KsUquER8NUTXtUDitD7FIpHdzccecbLMsI054nBj7cTjMa4_-7csB0zDBXRJbe-3LoZQEhwuTtgJgbhChBA6nCZgFt4cFnd4g5jX-B2olo4_fQiXOjuOziYvRKkmZUILMc8mmrVv0m00__y30000)
-   
+   *Giải thích:
+    - PaymentUI kết nối với PaymentController để điều phối thông tin đầu vào và hiển thị kết quả.
+    - aymentController điều phối thông tin thanh toán giữa Payment và Order.
+    - Order lưu giữ thông tin chi tiết về đơn hàng và được PaymentController gọi để lấy thông tin khi cần thiết.
+    
 4. Phân tích ca sử dụng Maintain Timecard
-   
-6. Hợp nhất kết quả phân tích
+   * Các lớp phân tích cho ca sử dụng Maintain Timecard
+    - Boundary Class: TimecardUI
+      + Mô tả: Quản lý giao diện người dùng để nhập và hiển thị thông tin bảng chấm công.
+      + Nhiệm vụ: Nhận dữ liệu chấm công từ người dùng và hiển thị kết quả lưu trữ hoặc cập nhật thông tin.
+        
+    - Control Class: PaymentController
+      + Mô tả:  Xử lý logic nghiệp vụ cho quy trình duy trì bảng chấm công.
+      + Nhiệm vụ: Điều phối quá trình nhập, chỉnh sửa và lưu thông tin chấm công; xử lý các yêu cầu từ TimecardUI và tương tác với lớp Employee và Timecard.
+      
+    - Entity Class: Timecard
+      + Mô tả: Đại diện cho bảng chấm công của một nhân viên.
+      + Nhiệm vụ:  Lưu trữ dữ liệu chấm công, bao gồm ngày làm việc, số giờ làm, và trạng thái (xác nhận hoặc chờ xác nhận).
+    
+    - Entity Class: Employee
+      + Mô tả: Đại diện cho thông tin nhân viên.
+      + Nhiệm vụ: Lưu giữ thông tin cơ bản của nhân viên (ID, tên, chức vụ) để tham chiếu khi lưu trữ chấm công.
+      
+  * Biểu đồ sequence
+    
+    ![]([https://www.planttext.com/api/plantuml/png/UhzxVq1YPMvgNacefuAkdGAKuvoVLrAKdvEJMgHWfP2UMW8LzinBozVGvC9K1DJfNvG2KmrckgIM96Rc5EDI3XK4QYWeoazEBIw62Y3Kut9EQK5AOabgS4bYIIaXqu5-ib98oImko4ciX0e5fHQNve1i0G000F__0m00](https://www.planttext.com/api/plantuml/png/X90z3i8m38Ntd28Z3Br01rG965Y1ifl6I97oKpbEfPwDWIDn1HBKeYmHYuVdz_az-VryTO61E5eZO61FiWz8GkGfcvsyQei3aEfFifNe66bL3i2msOh2KDZttZ5vOzAHLePujvehNE5C_D6Eni-8YPgGz6DUXKJyTaqj21V7BQCQLJLcLNCvcB1IhHx4YtX9yF-Kx--K3gE1EHDd3D5mmaI7JkNFVm000F__0m00))
+    
+  * Nhiệm vụ của từng lớp phân tích
+    -TimecardUI: Nhận dữ liệu từ người dùng và gửi đến TimecardController để xử lý. Sau khi xử lý xong, TimecardUI hiển thị kết quả cho người dùng.
+    - TimecardController: Làm trung gian điều phối các yêu cầu từ TimecardUI, bao gồm xác minh nhân viên và lưu trữ dữ liệu chấm công vào Timecard.
+    - Timecard: Lưu trữ chi tiết chấm công và trả lại kết quả cho TimecardController.
+    - Employee: Xác minh danh tính nhân viên dựa trên ID được nhập từ TimecardController.
+      
+  * Một số thuộc tính và quan hệ giữa các lớp phân tích
+    - TimecardUI
+      + Phương thức: enterTimecardData(), displaySaveResult()
+    - TimecardController
+      + Phương thức: submitTimecardData(), verifyEmployee(), saveTimecardData()
+    - Timecard
+      + Thuộc tính: date, hoursWorked, status
+      + Phương thức: saveTimecardData()
+    - Employee
+      + Thuộc tính: employeeID, name, position
+      + Phương thức: verifyEmployee()
+  * các biểu đồ lớp
+    
+![](https://www.planttext.com/api/plantuml/png/Z59BJiCm4Dtx55xIHIwG1Qf4MNHBGQoTUA0ZR4_a6GT55ITZmP6u0eOwQHLIX9VlCs_yxC_tZpMBYPAyKwqppFeUFRGcseUjFYYTJwKX2CGHtnWnLojTwvxG5e55xfmPTgQ7E-3av2HuKxEvDnGaadCGf_cS6e_oLq0F4P-6Mzyv6W1-s8R8ZVwSk-p-bJvbMYEGLLaE1TbJYln8yGLi9YobnerKhaWIPtGd4SFp_sF7ZKzL5c2xoLeCKk1WFCp7TyGeI66EN-eYXvwzNLLTBrLUwyJ0Qe4vDnntWsXQOVsAihzacEvN7zT2A7grXc2_FzKN0000__y30000)
 
+  *Giải thích:
+    - TimecardUI:
+      +  Là lớp giao diện người dùng, có nhiệm vụ nhận dữ liệu từ người dùng và hiển thị kết quả lưu trữ.
+      + Phương thức chính là enterTimecardData() để nhập thông tin chấm công và displaySaveResult() để hiển thị kết quả.
+    - TimecardController:
+      + Là lớp điều khiển xử lý logic cho việc duy trì bảng chấm công.
+      + Nó tương tác với Timecard và Employee để xác minh nhân viên và lưu dữ liệu chấm công.
+      + Các phương thức quan trọng gồm submitTimecardData() để xử lý dữ liệu từ UI, verifyEmployee() để xác minh danh tính nhân viên, và saveTimecardData() để lưu thông tin chấm công.
+    - Timecard:
+      + Là lớp thực thể đại diện cho bảng chấm công của một nhân viên.
+      + Nó lưu trữ các thuộc tính như date (ngày), hoursWorked (số giờ làm việc), và status (trạng thái chấm công).
+      + Phương thức saveTimecardData() dùng để lưu thông tin chấm công vào cơ sở dữ liệu.
+    - Employee:
+      + Đại diện cho thông tin nhân viên, bao gồm employeeID, name, và position.
+      + Phương thức verifyEmployee() dùng để xác minh nhân viên dựa trên ID.
+    - Mối Quan Hệ
+      + TimecardUI sử dụng TimecardController để truyền dữ liệu.
+      + TimecardController tương tác với Timecard để lưu trữ thông tin chấm công.
+      + TimecardController cũng xác minh thông tin với Employee.
+5. Hợp nhất kết quả phân tích
+  - Kết quả phân tích cho thấy cả hai ca sử dụng đều có cấu trúc tương tự, với các lớp giao diện người dùng, điều khiển, và thực thể. Điều này cho thấy tính nhất quán trong thiết kế và phát triển hệ thống.
+  - Cả hai ca sử dụng đều yêu cầu xác thực người dùng để đảm bảo tính bảo mật.
+  - Các lớp điều khiển trong cả hai ca sử dụng đều có trách nhiệm xử lý logic và tương tác với các lớp thực thể, cho thấy tính tái sử dụng cao trong mã nguồn.
 
