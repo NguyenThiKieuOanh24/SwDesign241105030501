@@ -76,9 +76,9 @@
 ![](https://www.planttext.com/api/plantuml/png/T591JiCm4Bpx5Nk4GpuGeQg8NY8XKL7n01DlMqksD_AkWoh4opZm9Bw0qrf9MrBVTcPsFRFsx_VFaaL7ITwfrcbcMEk3no1l3NmgoAU27Ke1cx2bktkeeITh2ciiTquVYk8LEJcPD5_gSkmJ1Oda7CPnV1UfHUOYkDqwDcXFAPSr64hl3WlgKVPaChgHQCEke3cS9Bv6KsUquER8NUTXtUDitD7FIpHdzccecbLMsI054nBj7cTjMa4_-7csB0zDBXRJbe-3LoZQEhwuTtgJgbhChBA6nCZgFt4cFnd4g5jX-B2olo4_fQiXOjuOziYvRKkmZUILMc8mmrVv0m00__y30000)
 
    *Giải thích:
-      - PaymentUI kết nối với PaymentController để điều phối thông tin đầu vào và hiển thị kết quả.
-      - aymentController điều phối thông tin thanh toán giữa Payment và Order.
-      - Order lưu giữ thông tin chi tiết về đơn hàng và được PaymentController gọi để lấy thông tin khi cần thiết.
+     + PaymentUI kết nối với PaymentController để điều phối thông tin đầu vào và hiển thị kết quả.
+     + aymentController điều phối thông tin thanh toán giữa Payment và Order.
+     + Order lưu giữ thông tin chi tiết về đơn hàng và được PaymentController gọi để lấy thông tin khi cần thiết.
     
 4. Phân tích ca sử dụng Maintain Timecard
    
@@ -101,7 +101,7 @@
       
   * Biểu đồ sequence
     
-    ![]([https://www.planttext.com/api/plantuml/png/UhzxVq1YPMvgNacefuAkdGAKuvoVLrAKdvEJMgHWfP2UMW8LzinBozVGvC9K1DJfNvG2KmrckgIM96Rc5EDI3XK4QYWeoazEBIw62Y3Kut9EQK5AOabgS4bYIIaXqu5-ib98oImko4ciX0e5fHQNve1i0G000F__0m00](https://www.planttext.com/api/plantuml/png/X90z3i8m38Ntd28Z3Br01rG965Y1ifl6I97oKpbEfPwDWIDn1HBKeYmHYuVdz_az-VryTO61E5eZO61FiWz8GkGfcvsyQei3aEfFifNe66bL3i2msOh2KDZttZ5vOzAHLePujvehNE5C_D6Eni-8YPgGz6DUXKJyTaqj21V7BQCQLJLcLNCvcB1IhHx4YtX9yF-Kx--K3gE1EHDd3D5mmaI7JkNFVm000F__0m00))
+    ![](https://www.planttext.com/api/plantuml/png/X90z3i8m38Ntd28Z3Br01rG965Y1ifl6I97oKpbEfPwDWIDn1HBKeYmHYuVdz_az-VryTO61E5eZO61FiWz8GkGfcvsyQei3aEfFifNe66bL3i2msOh2KDZttZ5vOzAHLePujvehNE5C_D6Eni-8YPgGz6DUXKJyTaqj21V7BQCQLJLcLNCvcB1IhHx4YtX9yF-Kx--K3gE1EHDd3D5mmaI7JkNFVm000F__0m00)
     
   * Nhiệm vụ của từng lớp phân tích
     -TimecardUI: Nhận dữ liệu từ người dùng và gửi đến TimecardController để xử lý. Sau khi xử lý xong, TimecardUI hiển thị kết quả cho người dùng.
