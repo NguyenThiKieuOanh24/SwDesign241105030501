@@ -144,7 +144,22 @@
       + TimecardController tương tác với Timecard để lưu trữ thông tin chấm công.
       + TimecardController cũng xác minh thông tin với Employee.
 5. Hợp nhất kết quả phân tích
-  - Kết quả phân tích cho thấy cả hai ca sử dụng đều có cấu trúc tương tự, với các lớp giao diện người dùng, điều khiển, và thực thể. Điều này cho thấy tính nhất quán trong thiết kế và phát triển hệ thống.
-  - Cả hai ca sử dụng đều yêu cầu xác thực người dùng để đảm bảo tính bảo mật.
-  - Các lớp điều khiển trong cả hai ca sử dụng đều có trách nhiệm xử lý logic và tương tác với các lớp thực thể, cho thấy tính tái sử dụng cao trong mã nguồn.
+  * Kiến trúc hệ thống
+    - Hệ thống "Payroll System" được thiết kế với cấu trúc kiến trúc theo mô hình 3 lớp (Three-tier Architecture), bao gồm:
+      + Presentation Layer (Lớp giao diện): Chịu trách nhiệm tương tác với người dùng qua các lớp như PaymentUI và TimecardUI.
+      + Business Logic Layer (Lớp logic nghiệp vụ): Chứa các lớp điều khiển như PaymentController và TimecardController để xử lý các nghiệp vụ thanh toán và quản lý bảng chấm công.
+      + Data Layer (Lớp dữ liệu): Lưu trữ và quản lý dữ liệu trong các lớp thực thể như Payment, Order, và Timecard.
+  * Biểu đồ package mô tả kiến trúc:
+
+    ![](https://www.planttext.com/api/plantuml/png/UhzxlqDnIM9HIMbk3bT1Od9sOdggWb90KMfnQbv9OabcVfw2Js9bQf6IGZMNWa9qG69bBb0Yr3CMn0l9p4rDJYnA0N5hkH3QdKgBC_DIYuiLVFBJCvEn6U2SdrTIb9-Jarg4OX2oCBA1BeabYTYC0MlsBqf1CmRCSSqjoCclJ4q5cUIGcfS2yY00003__mC0)
+    
+  * Biểu đồ lớp:
+
+![](https://www.planttext.com/api/plantuml/png/X9GxJiD048PxdsAK1YXy0GkXI8I22aI2g3VUmLbb7zO-8bae9w7A2Q1FGO6KU-G4N86rMJ_YEC6Lzv_PVsQ_MVjd-pKsbcZh18zoaYv9XZ1w98L0QM5Q68jY16yHGCg9CH0Yp_ULLZv-XJh84xI4SNDv5MAKcPoJ8aIVq3Xkg-0wwZlUAccruXnruvnhbQ8n8Q4nNH7EAB7OrO_zWaiCH2WdRG9KkJd780gq2qKJc5hDP1P4py4wSo026B8wLUb1qwRR65IvkfyamAGD4lFm0fAEwpho7Wtg6HEO4aq7MDUXFknQdn1B-gYdljrXplMk0T36pGMpWxOhrEork1CvLmNYASy6GZcN1Bn33NgXd3OlIY-HzaPmalPH7vs2TIDDGGp28NX91FQS1m_YdIzWjllSRMG6zdkJGiRssmy2QVdEzzltF3g-dt5yqtu72JY3vdpMsPpg5YL__J6V5GqCginhRqEm-oVlV5ODebkuXo9TE4zlOFzrvsYjd42g_3V0f1z-M_OWsRUKqoeyHadBFyul0000__y30000)
+
+  * Biểu đồ tuần tự:
+    
+![](https://www.planttext.com/api/plantuml/png/X99D3i8W48Ntd8AbBhn05yP4NRZI67i0qexQX48pJ6CycmkFv1KioFJ7sBeX3FFUyFZ2w_5SEL98TQc5oiYYJ1sW47wLYwKyg7i9Xj9T8WjJrHJhdJdRsLoqtPvqRGsXrHemaHNQ39oBdSxGQNh6H5w0vs-0LA7Tc6EFkH_VwCDkc6Oa2mBLQ6GLHVdd1X46J5jia1JD9PFvFIDtjRTO7i7Lsh-vPNagIiWKvYrCFeZvktvV_OCdjtgUOI8-3OYuw9Z-DctBIjixG31nyHLjB5WaHInZkZpcZmzO5Y1FluanSzroNe79_JT-0m00__y30000)
+
+
 
