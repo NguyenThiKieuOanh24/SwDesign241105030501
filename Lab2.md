@@ -1,4 +1,4 @@
-I.Phân tích các ca sử dụng trong hê thống Payment System.
+I. Phân tích các ca sử dụng trong hê thống Payment System.
   1. Phân tích ca sử dụng Create Administrative Report.
     * Các lớp phân tích cho ca sử dụng Create Administrative Report:
       - Actor: PayrollAdministrator
@@ -9,6 +9,7 @@ I.Phân tích các ca sử dụng trong hê thống Payment System.
     * Biểu đồ sequence:
 
 ![](https://www.planttext.com/api/plantuml/png/Z9D1JiCm44NtFeMNxQ8NO86Ae4ALG495i1_YQHdXscKygPIpiU18N04xSTAaj2LUMChel__7O-VdwtiU15ZAhLNXWvnc7r118Pxr4rJihRqnMt8KX24MrPildG6kz0ftdkLbgMwzawZBXVnbaTN22KahLEgKdPvTTqRwIZD-bXWaEp62a7UJgUeadVmG4x4Do3joIv4W4tHKJzdHaTc39GE2V_HwTZea0x6X5ORIYW8h-ZKLTUkXT5mNKpVeC1uScyAaoE2qHvxBvxfqdmtCPFfFMZrGGs5deSfn3L9lgVbds6DxEpglyPUKw87lePsp5nLsMD2wIkY3BzhR7S9d9XSESJQZn-JboQLGCogjFxb4HSsQUDjl5sr0VKUX03R78xnu3DCmWy6XCwesNBhwaUauyaSAWTncxDFgjxnWzXoja-qyRkdN_WK00F__0m00)
+
 
     * Nhiệm vụ của từng lớp phân tích
       - ReportUI: Nhận các thông tin từ Payroll Administrator như loại báo cáo, thời gian và tên nhân viên, hiển thị kết quả báo cáo và cung cấp tùy chọn lưu trữ.
@@ -29,7 +30,7 @@ I.Phân tích các ca sử dụng trong hê thống Payment System.
         
     * Các biểu đồ lớp:
 
-    ![](https://www.planttext.com/api/plantuml/png/h5FBRi8m4BpdAtni3_m0gX0IL2eIfq9LzRZ42rWuNdUzYHHL_R8U-adzXJhWX4Uek3GN9plZdV5a_VFrFGu2B6LXix0pJZ45p78B8QXdzCJoCbCVcTe_ZEyb1ZdK9umWXjpTlHggYenE96s2jr0VI9TWwh202Yy9dzcPx8ISC5cBtCblGBR8hReHP0EN0XLOeq7m35yHsRO7EkI8dwWVNXCUFEPcNJS6vvHVFM0uchU94WaBOUCs_InoO7tZgEc0WvXEyxciFNOD4xB2ZN7Jw3i2pPBAwFILOk4jrOXp4oGYpVBmc6gZnEaPlnvFdbBin_H_6RJMkXHQ_xDfv1edgUoWwCKY962VgEJmIhn37N5DvSgsKNYetn1uIIcb4r0fprGPZQr-fC2PlMxy1uDHVoY7gWmOibxzI8wKlBaZ61GulO_i3tuNmL2jKV9jt15d6DIQgSYoSVpBpVNy1G00__y30000)
+   ![](https://www.planttext.com/api/plantuml/png/h5FBRi8m4BpdAtni3_m0gX0IL2eIfq9LzRZ42rWuNdUzYHHL_R8U-adzXJhWX4Uek3GN9plZdV5a_VFrFGu2B6LXix0pJZ45p78B8QXdzCJoCbCVcTe_ZEyb1ZdK9umWXjpTlHggYenE96s2jr0VI9TWwh202Yy9dzcPx8ISC5cBtCblGBR8hReHP0EN0XLOeq7m35yHsRO7EkI8dwWVNXCUFEPcNJS6vvHVFM0uchU94WaBOUCs_InoO7tZgEc0WvXEyxciFNOD4xB2ZN7Jw3i2pPBAwFILOk4jrOXp4oGYpVBmc6gZnEaPlnvFdbBin_H_6RJMkXHQ_xDfv1edgUoWwCKY962VgEJmIhn37N5DvSgsKNYetn1uIIcb4r0fprGPZQr-fC2PlMxy1uDHVoY7gWmOibxzI8wKlBaZ61GulO_i3tuNmL2jKV9jt15d6DIQgSYoSVpBpVNy1G00__y30000)
 
 
     * Giải thích:
