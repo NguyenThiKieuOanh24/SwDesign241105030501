@@ -70,63 +70,191 @@ I. Phân tích các ca sử dụng trong hê thống Payment System.
       - Actor: Employee
       - Boundary Class: ReportUI
       - Control Class: ReportController
-      - Entity Class: Report
-      - Entity Class:  Project
+      - Entity Class:
+        + Report
+        + ProjectManagementDB
+        + Employee
     * Biểu đồ sequence:
 
-![]()
+![](https://www.planttext.com/api/plantuml/png/Z5HBJiCm4Dtd55PNPS45AXKLMYIG024e1nYI8JLoF64ygTIpiU18N05RiPj-NDGk8lLbthmtRqRv_VwPEG6MhZ45b4AiRflMq0QnQ3siIzs25VM2BR6ytMV0ELbXCWOvyt8FUcRwn58UmKAD3LfPt1H5abENLrkLYMBywj19L604qMJ75qMg6Ae7-OcgGLR8YQG5MSEMD1G6Sf8za5fkMhosrG84FV7OswvQoxJM5UQ8O5800LVJgHejIS2eE-hOgGyVSmnZL2Z_opdCfEKdH8duV0LSurFNl2CxBndQP2XvwupIiSsrE2khZ8L8Fokn0nxQAhkY7WipMsIVQ_z_NCR5fhsUcZ0WVXtmJ-zmQPLshO5DR3xG-YLkvobNH0wT4b8ErhYJLN-CHncz-ge7AjFXviC91c8egNQ10jhih-FKlGSdqRY9zDDRJ746qavvI7_c7-43y0S00F__0m00)
 
 
     * Nhiệm vụ của từng lớp phân tích
       - ReportUI: Thu thập tiêu chí báo cáo từ nhân viên, hiển thị báo cáo được tạo, và xử lý yêu cầu lưu báo cáo từ nhân viên.
       - ReportController: Xử lý các bước tạo báo cáo, lấy thông tin về dự án (nếu cần), và thực hiện lưu báo cáo khi được yêu cầu.
       - Report: Tạo ra và lưu trữ dữ liệu của báo cáo, bao gồm loại báo cáo và thông tin chi tiết từ các nhân viên được yêu cầu.
+      - ProjectManagementDB: Cung cấp danh sách mã số dự án và dữ liệu liên quan cho lớp Report khi cần tạo báo cáo.
+      -  Employee:Cung cấp dữ liệu nhân viên để lớp Report sử dụng trong quá trình tạo báo cáo.
+      
+    * Một số thuộc tính và quan hệ giữa các lớp phân tích:
+    - Report:
+      + Thuộc tính:
+        reportTypeSelection: Loại báo cáo.
+        dateRangeSelection:	Ngày bắt đầu và kết thúc cho báo cáo.
+      + Phương thức:
+        requestReportCreation() : Yêu cầu tạo báo cáo.
+        displayReport() : Hiển thị báo cáo cho nhân viên.
+        requestSaveLocation() : Yêu cầu thông tin vị trí lưu trữ báo cáo.
+    - ReportController
+      + Thuộc tính:
+        criteria : Tiêu chí để tạo báo cáo (bao gồm loại báo cáo, ngày, mã dự án nếu có).
+      + Phương thức:
+        gatherReportCriteria() : Thu thập tiêu chí báo cáo từ ReportUI.
+        validateCriteria() : Kiểm tra tính hợp lệ của các tiêu chí.
+        generateReport() : Tạo báo cáo dựa trên tiêu chí.
+        saveReport() : Lưu báo cáo tại vị trí do nhân viên chỉ định.
+    - Report:
+      + Thuộc tính:
+        reportType : Loại báo cáo (Tổng số giờ làm việc, số giờ làm cho dự án, thời gian nghỉ phép/bệnh, lương tính đến hiện tại).
+        beginDate : Ngày bắt đầu của báo cáo.
+        endDate : Ngày kết thúc của báo cáo.
+        employeeData : Danh sách nhân viên có trong báo cáo.
+        chargeNumber : Mã dự án khi tạo báo cáo dự án.
+      + Phương thức:
+        generateReport(): Tạo báo cáo dựa trên các tiêu chí cung cấp.
+        save(): Lưu báo cáo vào vị trí do nhân viên chỉ định.
+    - Employee
+      + Thuộc tính:
+        employeeID : ID của nhân viên.
+        name : Tên nhân viên.
+        totalHoursWorked : Tổng số giờ làm việc.
+        payYearToDate : Lương tích lũy tính đến hiện tại.
+      + Phương thức:
+        provideEmployeeData():Cung cấp dữ liệu cần thiết của nhân viên cho báo cáo.
+    - ProjectManagementDB
+      + Phương thức:
+      getChargeNumbers() :Truy xuất danh sách mã dự án có sẵn từ cơ sở dữ liệu.
+  
+    * Các biểu đồ lớp:
+
+   ![](https://www.planttext.com/api/plantuml/png/h5J1ZjD03BtdAqOz0L8FN2jKhMYHM6b1Y5s4EBepRZhBP1myJgK8yMKS-2H-0IUTfDict3QNIVoUxUSdJ_x-_dEJ15YQAXGsG4hcCzR4ykNM_2nC_p3-Q339XX44J-YBbsPbZkHTfZYVwW3jF9Zpx-68TsH1FCKpvLTnqNP3KPX2G1xRbo07v0op5sGFrosE4BnJTHVuZYWCDJ0YNwe_lMOyrMZzlfsNc2cAvVIGAKgu5_QndBfXWTsr6rUZvW6Nwa_t-T3ME1RCo0vB7xUgMu7ko66CRYPOrO5Qn3kVH97kUFCknzQPCn4-Ru_DBavjUZuF1ccZ2uF-swroVPGSZb1DR14I2E-fuVIL-3iwnHqrkp1OKKFx3O4VABlq13IcPZfwXqD_fS2Cl4zCZsZb0qGeiS8esxVdXKJP781B_DXKE-JKf_T-drIkkpBZBLekrzFTNfacOIecyJDPARQ_SCb0TBtp_-6FJgxC7iKUD4El0fWzKpMVCJUSkeIrBXP6sveziR7zY2QUPio5pEBreY-nUBLusbWj8-lxXIYA6otJ_Kx-0G00__y30000)
+
+ 3. Phân tích ca sử dụng Maintain Employee Information:
+    * Các lớp phân tích:
+      - Boundary Class: EmployeeUI
+      - Control Class: EmployeeController
+      - Entity Class:
+        + Employee
+        + EmployeeDatabase
+        + PayrollSystem
+        + IDGenerator
+    * Biểu đồ sequence:
+  -  Thêm nhân viên:
+![](https://www.planttext.com/api/plantuml/png/Z59BRi8m4Dtx5Bv0Bz058ceGogP2L3c0YmUmwinGPz8eP-kYH-8As8A0JJxgpXwzpyoREV_-BMjMZflA2hLZSdAZEaVMPheoQ6fsoXS581lkvAewMUe0okAvyaR8WGO3xFC_Lwm-LNsl5_aQ4AusOinSlYmYO_agj_3TGCsIIMPQFumYK4HvTEQf7u0w8VLYOWG-vNld5hWdLoasXFyntpZwCHhc-Qb_58uNkBr1bcXyAv5GBcBaL0DRuCPXGCzFsw_8KvAiGbqCG5DksUuBgRMW3n1apCoOISnzJE_G9XEc2OzUYb_maTe1S-ct7Wxy0W00__y30000)
+
+- Cập nhật nhân viên:
+
+![](https://www.planttext.com/api/plantuml/png/b9D1Si8m34NtFeKlq0kmO62W2tPC6GuWi6WzjIsgA30v6mkEn1LmcWb9ZIbXQLbFNr-MBwVpf11WARrJi1LYlOIAoRcfyJROGXXYK64GAvL-ztj75U9waKPc5AJ6y2utFSz1O0C5AfLJqc_ZdeeUwG_yAR4GBQJNUmE2NU5UNe_gEedq2eD9kRQaoX2Fr6_iOZv4Tibqi0QpM5wjdSglfh35GvyEEs8FOYceE-1H3x5CoQ4hKWElM6wcPhBY0wp_XpyTGVfYVtf_wdow_GvqT6W-spQ6-8vNEyi-9HghsLMDw_L5nnPiB4xYmjL_wGe00F__0m00)
+  
+- Xóa nhân viên:
+
+![](https://www.planttext.com/api/plantuml/png/b9DDReCm48NtFeKlq0jaKIKghPH5gwXH3p0nGsDXFAaP4d6sBdgaNg66a63-15qocc_UlCVuz_jddJCuBZ8ZG34vkOFIaJ6REDDMv-p05mLQrbpAv-nag4JysFOhJsIvmd3Gs_-EWE40-RtUwEtBd34JOanUFZm6qd8bt_6hm9mbaupG86Eh5lG5LBkUf_Teupvt6ob6Y2drExkDbiZk79rrZAFOkDejgbgJdSPpIDk4N0QioOe1CBM37rCusmwfWFzOzYs9RbJRz9UuRyWh4UuyQ_qLNDfkx4qFPypwtgZKqiLW_8bp6tJkqQDln3efQzqNRS5K3Ug8AXNTpYNIzIojO440TUoJeLs37dqh_hwFTEdyAR7s5r-zy3y0003__mC0)
+
+    * Nhiệm vụ của từng lớp phân tích
+      - EmployeeUI: Quản lý giao diện cho Payroll Administrator để thực hiện các chức năng thêm, cập nhật và xóa thông tin nhân viên.
+      - EmployeeController: Điều phối quá trình thêm, cập nhật và xóa nhân viên, xử lý logic và giao tiếp với EmployeeDatabase.
+      - Employee: Lưu trữ thông tin nhân viên, bao gồm các thuộc tính cá nhân và mức lương.
+      - EmployeeDatabase: Lưu trữ, truy xuất, và quản lý dữ liệu nhân viên trong hệ thống.
+      - PayrollSystem: Quản lý và cập nhật bảng lương liên quan đến nhân viên, đặc biệt là việc xử lý nhân viên đã xóa.
+      - IDGenerator: Tạo ID duy nhất cho nhân viên mới trong quá trình thêm.
     
     * Một số thuộc tính và quan hệ giữa các lớp phân tích:
-      - ReportUI
-        + Phương thức: requestReportCreation(), displayReport(), requestSaveReport().
-      - ReportController
-        + Phương thức: gatherReportCriteria(), validateCriteria(), generateReport(), specifySaveLocation(), saveReport(), discardReport().
-      - Report
-        + Thuộc tính: reportType, beginDate, endDate, employeeList, location.
-        + Phương thức: generateReport(criteria), saveReport(location), discardReport().
-      - Employee
-        + Thuộc tính: employeeID, name, totalHoursWorked, payYearToDate.
-        + Phương thức: provideEmployeeData().
-        
+     - Các Thuộc Tính
+      + EmployeeUI
+        functionSelection : Lựa chọn thêm, cập nhật hoặc xóa nhân viên.
+        employeeInfoInput :  Thông tin nhân viên nhập vào.
+        confirmationResponse : Xác nhận xóa từ Payroll Administrator.
+      + EmployeeController
+        currentEmployee : Thông tin của nhân viên hiện tại trong quá trình cập nhật/xóa.
+        actionType : Loại hành động đang thực hiện (Add, Update, Delete).
+      + Employee:
+        employeeID : Mã ID nhân viên.
+        name : Tên nhân viên.
+        employeeType : Loại nhân viên (theo giờ, lương cứng, có hoa hồng).
+        address : Địa chỉ của nhân viên.
+        socialSecurityNumber : Số bảo hiểm xã hội của nhân viên.
+        hourlyRate : Lương theo giờ (dành cho nhân viên theo giờ).
+        salary :  Mức lương cứng (dành cho nhân viên lương cứng hoặc hoa hồng).
+        commissionRate : Tỷ lệ hoa hồng (dành cho nhân viên có hoa hồng).
+      + EmployeeDatabase
+        employees : Danh sách các nhân viên hiện có trong hệ thống.
+      + PayrollSystem
+        markedForDeletion : Danh sách các nhân viên đã bị đánh dấu để xóa.
+        finalPaycheckProcessing() : Xử lý lần trả lương cuối cùng cho nhân viên bị xóa.
+      + IDGenerator:
+        generateID() : int — Tạo mã ID duy nhất cho nhân viên mới.
+    - Quan Hệ Giữa Các Lớp:
+      + EmployeeUI uses EmployeeController: EmployeeUI gửi yêu cầu tới EmployeeController để điều phối quá trình thêm, cập nhật, hoặc xóa nhân viên.
+      + EmployeeController manages Employee: EmployeeController quản lý việc thêm, cập nhật, và xóa thông tin của một đối tượng Employee.
+      + EmployeeController stores in EmployeeDatabase: EmployeeController lưu hoặc cập nhật thông tin nhân viên vào EmployeeDatabase.
+      + EmployeeController coordinates with PayrollSystem: EmployeeController tương tác với PayrollSystem khi cần xử lý việc trả lương cho nhân viên bị xóa.
+      + IDGenerator generates ID for EmployeeController: IDGenerator cung cấp ID duy nhất cho nhân viên mới qua EmployeeController.
+    * Các biểu đồ lớp:
+
+   ![](https://www.planttext.com/api/plantuml/png/X9HBZjH038RtEOMN8D4NA8r68n50BV4OJSC1d9JJNKmzed9bK8Gu6GkEn1LmXIHq9nqcgwZysV7_svNVFt_TSSAOEcUBsY8pl76j3JtHbpryBq2U7JIThvC9_a2MXXS5XnIDFuvn6bFslWbxttP9mGTiR_uoh-1JzLNIRaUu3hunqM6kyq3S1i-ae0h14lg10T26MulzrChR4DsBbmgUWj6NnEkpOZFnerX84Ih5O2t5MLBTnKW-JOIQsJ6EWyxFVKiNMW5GwmbTjDIr6XDj1BLOToMuQdLkSFQqL61y6ayzEjemVzNhBlSQYNbnog4sQ0ya5fZKV-nSHN61d48NRVyWSXJeq5LsieNHOkmNXtLmpZ3dUIup08uqcrnIGcCvYn-_jf9VOi8AUMs3Y7XlEDrCuErOdl7fdwkqckP_9_GSlfZPDZxBkCS-xzcXvqHkrk0mFfAM9IvpmU7wNDNI68zMIjGdgX_lOwXbTkBIUbdsvJlo5365QQ6ppyE9x4lcyyO8VdQNTxjhrq51nyJ5bSWPBvH3ZyTdmNbw2bXw8vO-Db8kdLAoGo5gqPyawPj9f-9SurRla-Ri23GX5dVaTVwJ_G400F__0m00)
+
+4. Phân tích ca sử dụng Run Payroll
+    * Các lớp phân tích cho ca sử dụng Create Employee Report:
+      - Boundary Class: PayrollUI
+      - Control Class: PayrollController
+      - Entity Class:
+        + Employee
+        + Timecard
+        + Payroll
+        + BankTransaction
+    * Biểu đồ sequence:
+
+![](https://www.planttext.com/api/plantuml/png/Z5HBJiCm4Dtd55PNPS45AXKLMYIG024e1nYI8JLoF64ygTIpiU18N05RiPj-NDGk8lLbthmtRqRv_VwPEG6MhZ45b4AiRflMq0QnQ3siIzs25VM2BR6ytMV0ELbXCWOvyt8FUcRwn58UmKAD3LfPt1H5abENLrkLYMBywj19L604qMJ75qMg6Ae7-OcgGLR8YQG5MSEMD1G6Sf8za5fkMhosrG84FV7OswvQoxJM5UQ8O5800LVJgHejIS2eE-hOgGyVSmnZL2Z_opdCfEKdH8duV0LSurFNl2CxBndQP2XvwupIiSsrE2khZ8L8Fokn0nxQAhkY7WipMsIVQ_z_NCR5fhsUcZ0WVXtmJ-zmQPLshO5DR3xG-YLkvobNH0wT4b8ErhYJLN-CHncz-ge7AjFXviC91c8egNQ10jhih-FKlGSdqRY9zDDRJ746qavvI7_c7-43y0S00F__0m00)
+
+
+    * Nhiệm vụ của từng lớp phân tích
+      - ReportUI: Thu thập tiêu chí báo cáo từ nhân viên, hiển thị báo cáo được tạo, và xử lý yêu cầu lưu báo cáo từ nhân viên.
+      - ReportController: Xử lý các bước tạo báo cáo, lấy thông tin về dự án (nếu cần), và thực hiện lưu báo cáo khi được yêu cầu.
+      - Report: Tạo ra và lưu trữ dữ liệu của báo cáo, bao gồm loại báo cáo và thông tin chi tiết từ các nhân viên được yêu cầu.
+      - ProjectManagementDB: Cung cấp danh sách mã số dự án và dữ liệu liên quan cho lớp Report khi cần tạo báo cáo.
+      -  Employee:Cung cấp dữ liệu nhân viên để lớp Report sử dụng trong quá trình tạo báo cáo.
+      
+    * Một số thuộc tính và quan hệ giữa các lớp phân tích:
+    - Report:
+      + Thuộc tính:
+        reportTypeSelection: Loại báo cáo.
+        dateRangeSelection:	Ngày bắt đầu và kết thúc cho báo cáo.
+      + Phương thức:
+        requestReportCreation() : Yêu cầu tạo báo cáo.
+        displayReport() : Hiển thị báo cáo cho nhân viên.
+        requestSaveLocation() : Yêu cầu thông tin vị trí lưu trữ báo cáo.
+    - ReportController
+      + Thuộc tính:
+        criteria : Tiêu chí để tạo báo cáo (bao gồm loại báo cáo, ngày, mã dự án nếu có).
+      + Phương thức:
+        gatherReportCriteria() : Thu thập tiêu chí báo cáo từ ReportUI.
+        validateCriteria() : Kiểm tra tính hợp lệ của các tiêu chí.
+        generateReport() : Tạo báo cáo dựa trên tiêu chí.
+        saveReport() : Lưu báo cáo tại vị trí do nhân viên chỉ định.
+    - Report:
+      + Thuộc tính:
+        reportType : Loại báo cáo (Tổng số giờ làm việc, số giờ làm cho dự án, thời gian nghỉ phép/bệnh, lương tính đến hiện tại).
+        beginDate : Ngày bắt đầu của báo cáo.
+        endDate : Ngày kết thúc của báo cáo.
+        employeeData : Danh sách nhân viên có trong báo cáo.
+        chargeNumber : Mã dự án khi tạo báo cáo dự án.
+      + Phương thức:
+        generateReport(): Tạo báo cáo dựa trên các tiêu chí cung cấp.
+        save(): Lưu báo cáo vào vị trí do nhân viên chỉ định.
+    - Employee
+      + Thuộc tính:
+        employeeID : ID của nhân viên.
+        name : Tên nhân viên.
+        totalHoursWorked : Tổng số giờ làm việc.
+        payYearToDate : Lương tích lũy tính đến hiện tại.
+      + Phương thức:
+        provideEmployeeData():Cung cấp dữ liệu cần thiết của nhân viên cho báo cáo.
+    - ProjectManagementDB
+      + Phương thức:
+      getChargeNumbers() :Truy xuất danh sách mã dự án có sẵn từ cơ sở dữ liệu.
+  
     * Các biểu đồ lớp:
 
    ![]()
 
-
-  * Giải thích:
-    - ReportUI (Boundary Class)
-      + requestReportCreation(): Bắt đầu quy trình tạo báo cáo khi Payroll Administrator yêu cầu.
-      + displayReport(): Hiển thị báo cáo sau khi được tạo.
-      + requestSaveReport(): Cho phép Payroll Administrator yêu cầu lưu báo cáo.
-    - ReportController (Control Class)
-      + gatherReportCriteria(): Thu thập các tiêu chí báo cáo từ ReportUI.
-      + validateCriteria(): Kiểm tra xem thông tin đầu vào từ người dùng có đủ và đúng không.
-      + generateReport(): Tạo báo cáo dựa trên các tiêu chí đã xác thực.
-      + specifySaveLocation(): Thu thập thông tin về tên và vị trí lưu trữ báo cáo.
-      + saveReport(location : String): Lưu báo cáo vào vị trí và tên mà người dùng chỉ định.
-      + discardReport(): Huỷ bỏ báo cáo nếu Payroll Administrator không yêu cầu lưu.
-    - Report (Entity Class)
-      + Thuộc tính:
-          reportType: Loại báo cáo (giờ làm việc tổng cộng hoặc lương tính đến hiện tại).
-          beginDate và endDate: Khoảng thời gian mà báo cáo bao phủ.
-          employeeList: Danh sách các nhân viên được báo cáo.
-          location: Vị trí lưu trữ báo cáo.
-      + Phương thức:
-          generateReport(criteria): Tạo báo cáo dựa trên tiêu chí từ ReportController.
-          saveReport(location : String): Lưu báo cáo theo thông tin vị trí do ReportController cung cấp.
-          discardReport(): Huỷ báo cáo nếu không cần lưu.
-    - Employee (Entity Class)
-      + Thuộc tính:
-          employeeID: ID duy nhất của nhân viên.
-          name: Tên của nhân viên.
-          totalHoursWorked: Tổng giờ làm việc của nhân viên.
-          payYearToDate: Lương tính đến thời điểm hiện tại của nhân viên.
-      + Phương thức:
-          provideEmployeeData(): Cung cấp dữ liệu của nhân viên cho lớp Report khi cần tạo báo cáo.
 
