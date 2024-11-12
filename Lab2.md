@@ -204,43 +204,28 @@ I. Phân tích các ca sử dụng trong hê thống Payment System.
         + BankTransaction
     * Biểu đồ sequence:
 
-![](https://www.planttext.com/api/plantuml/png/Z5HBJiCm4Dtd55PNPS45AXKLMYIG024e1nYI8JLoF64ygTIpiU18N05RiPj-NDGk8lLbthmtRqRv_VwPEG6MhZ45b4AiRflMq0QnQ3siIzs25VM2BR6ytMV0ELbXCWOvyt8FUcRwn58UmKAD3LfPt1H5abENLrkLYMBywj19L604qMJ75qMg6Ae7-OcgGLR8YQG5MSEMD1G6Sf8za5fkMhosrG84FV7OswvQoxJM5UQ8O5800LVJgHejIS2eE-hOgGyVSmnZL2Z_opdCfEKdH8duV0LSurFNl2CxBndQP2XvwupIiSsrE2khZ8L8Fokn0nxQAhkY7WipMsIVQ_z_NCR5fhsUcZ0WVXtmJ-zmQPLshO5DR3xG-YLkvobNH0wT4b8ErhYJLN-CHncz-ge7AjFXviC91c8egNQ10jhih-FKlGSdqRY9zDDRJ746qavvI7_c7-43y0S00F__0m00)
+![](https://www.planttext.com/api/plantuml/png/b9DDReCm48NtFeKlq0jaKIKghPH5gwXH3p0nGsDXFAaP4d6sBdgaNg66a63-15qocc_UlCVuz_jddJCuBZ8ZG34vkOFIaJ6REDDMv-p05mLQrbpAv-nag4JysFOhJsIvmd3Gs_-EWE40-RtUwEtBd34JOanUFZm6qd8bt_6hm9mbaupG86Eh5lG5LBkUf_Teupvt6ob6Y2drExkDbiZk79rrZAFOkDejgbgJdSPpIDk4N0QioOe1CBM37rCusmwfWFzOzYs9RbJRz9UuRyWh4UuyQ_qLNDfkx4qFPypwtgZKqiLW_8bp6tJkqQDln3efQzqNRS5K3Ug8AXNTpYNIzIojO440TUoJeLs37dqh_hwFTEdyAR7s5r-zy3y0003__mC0)
 
 
     * Nhiệm vụ của từng lớp phân tích
-      - ReportUI: Thu thập tiêu chí báo cáo từ nhân viên, hiển thị báo cáo được tạo, và xử lý yêu cầu lưu báo cáo từ nhân viên.
-      - ReportController: Xử lý các bước tạo báo cáo, lấy thông tin về dự án (nếu cần), và thực hiện lưu báo cáo khi được yêu cầu.
-      - Report: Tạo ra và lưu trữ dữ liệu của báo cáo, bao gồm loại báo cáo và thông tin chi tiết từ các nhân viên được yêu cầu.
-      - ProjectManagementDB: Cung cấp danh sách mã số dự án và dữ liệu liên quan cho lớp Report khi cần tạo báo cáo.
-      -  Employee:Cung cấp dữ liệu nhân viên để lớp Report sử dụng trong quá trình tạo báo cáo.
-      
+      - PayrollUI: Khởi tạo quá trình xử lý bảng lương và hiển thị trạng thái hoặc kết quả cho người dùng.
+      - Employee: Đại diện cho từng nhân viên và lưu trữ các thông tin chi tiết như mức lương, phương thức thanh toán và trạng thái xóa.
+      - Timecard: Quản lý giờ làm việc của từng nhân viên để cung cấp dữ liệu tính lương.
+      - Payroll: Thực hiện các phép tính cho lương ròng và áp dụng các khoản khấu trừ hợp pháp.
+      - BankTransaction: Xử lý giao dịch ngân hàng cho các khoản thanh toán qua chuyển khoản.
+      - PayrollController: Điều phối toàn bộ quy trình chạy bảng lương, lấy danh sách nhân viên, tính toán và thực hiện thanh toán dựa trên phương thức đã chọn.
     * Một số thuộc tính và quan hệ giữa các lớp phân tích:
-    - Report:
-      + Thuộc tính:
-        reportTypeSelection: Loại báo cáo.
-        dateRangeSelection:	Ngày bắt đầu và kết thúc cho báo cáo.
+    - PayrollUI:
       + Phương thức:
-        requestReportCreation() : Yêu cầu tạo báo cáo.
-        displayReport() : Hiển thị báo cáo cho nhân viên.
-        requestSaveLocation() : Yêu cầu thông tin vị trí lưu trữ báo cáo.
-    - ReportController
-      + Thuộc tính:
-        criteria : Tiêu chí để tạo báo cáo (bao gồm loại báo cáo, ngày, mã dự án nếu có).
+        runPayroll(): Gửi yêu cầu chạy bảng lương tới PayrollController.
+        printPaycheck(empInfo: Employee, netPay: Float): In phiếu lương cho nhân viên.
+        displayPayrollStatus(status: String): Hiển thị trạng thái quá trình chạy bảng lương.
+    - PayrollController
       + Phương thức:
-        gatherReportCriteria() : Thu thập tiêu chí báo cáo từ ReportUI.
-        validateCriteria() : Kiểm tra tính hợp lệ của các tiêu chí.
-        generateReport() : Tạo báo cáo dựa trên tiêu chí.
-        saveReport() : Lưu báo cáo tại vị trí do nhân viên chỉ định.
-    - Report:
-      + Thuộc tính:
-        reportType : Loại báo cáo (Tổng số giờ làm việc, số giờ làm cho dự án, thời gian nghỉ phép/bệnh, lương tính đến hiện tại).
-        beginDate : Ngày bắt đầu của báo cáo.
-        endDate : Ngày kết thúc của báo cáo.
-        employeeData : Danh sách nhân viên có trong báo cáo.
-        chargeNumber : Mã dự án khi tạo báo cáo dự án.
-      + Phương thức:
-        generateReport(): Tạo báo cáo dựa trên các tiêu chí cung cấp.
-        save(): Lưu báo cáo vào vị trí do nhân viên chỉ định.
+        runPayroll(): Quản lý toàn bộ quá trình chạy bảng lương.
+        getEligibleEmployees(): List: Lấy danh sách nhân viên đủ điều kiện nhận lương.
+        processEmployeePay(employee: Employee): Tính toán và xử lý thanh toán cho từng nhân viên.
+        markForDeletionIfNeeded(employee: Employee): Đánh dấu xóa nhân viên nếu cần.
     - Employee
       + Thuộc tính:
         employeeID : ID của nhân viên.
@@ -252,9 +237,128 @@ I. Phân tích các ca sử dụng trong hê thống Payment System.
     - ProjectManagementDB
       + Phương thức:
       getChargeNumbers() :Truy xuất danh sách mã dự án có sẵn từ cơ sở dữ liệu.
+    - Employee
+      + Thuộc tính:
+          employeeId: String
+          salary: Float
+          paymentMethod: String
+          markedForDeletion: Boolean
+      + Phương thức:
+        isEligibleForPayroll(currentDate: Date): Boolean: Kiểm tra điều kiện nhận lương.
+        getPaymentDetails(): Payment: Lấy thông tin thanh toán của nhân viên.
+    - Timecard
+      + Thuộc tính:
+        employeeId: String
+        hoursWorked: Float
+        date: Date
+      + Phương thức:
+        getHours(employeeId: String): Float: Lấy số giờ làm việc của nhân viên.
+    - Payroll
+      + Phương thức:
+        calculateNetPay(empInfo: Employee, hoursWorked: Float): Float: Tính lương ròng.
+        applyDeductions(empInfo: Employee): Float: Áp dụng các khoản khấu trừ hợp pháp.
+    - BankTransaction
+      + Thuộc tính:
+          transactionId: String
+          amount: Float
+    - Phương thức:
+        processTransaction(empInfo: Employee, netPay: Float): Boolean: Thực hiện giao dịch ngân hàng.
   
     * Các biểu đồ lớp:
 
-   ![]()
+   ![](https://www.planttext.com/api/plantuml/png/T5FBJiCm4BpdAto4GtyWGgZb8HM9Yaejuhor5sBLiIFlkYX2V1a7FebVm6wYfExZ5izCPiUpoT_FxvGOF8VQ5D80aLX2wvqngvOOQ_5L225yi3rwTIrAiNDQ9LY2aS40OoGpel5E8b64QxHC8_TTz4CUwyQu5h7pn_xqz125sdB2BDGOJolssduaWC20RoEaNDWOJD06BRvhfWW-Q-ARJdoRA8KgIDREdf13XhMkKO9NbpDKBdXwStwBAflhTkWvlZrF_CWCpilWPGM4BrwXx-nTUZpqFZTlBvhLBbW-vzhLkK2kN1-wwQ1rs-HTAMJGXaPiCBa3kprSRR-g1AyzM89zQTd6yWzYCXcNLue5MFX0EjKCvPRYbSu9yeukgh8xNr8TNAeKzoxMg6tyB4byQgwA8MuUQmwKKSU1PaHEwcYZEfiyol7KVR0fMfL-f7y0003__mC0)
 
+II. Code java mô phỏng ca sử dụng Maintain Timecard.
+import java.util.ArrayList; import java.util.Date; import java.util.Scanner;
 
+// Lớp đại diện cho thông tin của một nhân viên class Employee { private String employeeId; private String name;
+
+public Employee(String employeeId, String name) {
+    this.employeeId = employeeId;
+    this.name = name;
+}
+
+public String getEmployeeId() {
+    return employeeId;
+}
+
+public String getName() {
+    return name;
+}
+}
+
+// Lớp đại diện cho thông tin thẻ chấm công (timecard) class Timecard { private String employeeId; private Date date; private float hoursWorked;
+
+public Timecard(String employeeId, Date date, float hoursWorked) {
+    this.employeeId = employeeId;
+    this.date = date;
+    this.hoursWorked = hoursWorked;
+}
+
+public String getEmployeeId() {
+    return employeeId;
+}
+
+public Date getDate() {
+    return date;
+}
+
+public float getHoursWorked() {
+    return hoursWorked;
+}
+
+@Override
+public String toString() {
+    return "Timecard{" +
+            "employeeId='" + employeeId + '\'' +
+            ", date=" + date +
+            ", hoursWorked=" + hoursWorked +
+            '}';
+}
+}
+
+// Lớp đại diện cho bộ điều khiển quản lý thẻ chấm công class TimecardController { private ArrayList timecards = new ArrayList<>();
+
+// Phương thức để ghi lại thông tin thẻ chấm công
+public void addTimecard(String employeeId, Date date, float hoursWorked) {
+    Timecard timecard = new Timecard(employeeId, date, hoursWorked);
+    timecards.add(timecard);
+    System.out.println("Timecard đã được ghi nhận: " + timecard);
+}
+
+// Phương thức để xem thẻ chấm công của nhân viên
+public void viewTimecards(String employeeId) {
+    System.out.println("Danh sách thẻ chấm công của nhân viên ID: " + employeeId);
+    for (Timecard tc : timecards) {
+        if (tc.getEmployeeId().equals(employeeId)) {
+            System.out.println(tc);
+        }
+    }
+}
+}
+
+public class Main { public static void main(String[] args) { Scanner scanner = new Scanner(System.in); TimecardController timecardController = new TimecardController();
+
+    // Danh sách nhân viên mẫu
+    Employee employee1 = new Employee("E001", "John Doe");
+    Employee employee2 = new Employee("E002", "Jane Smith");
+
+    // Ghi thẻ chấm công cho nhân viên
+    System.out.println("Nhập số giờ làm việc của nhân viên " + employee1.getName() + ":");
+    float hoursWorked1 = scanner.nextFloat();
+    timecardController.addTimecard(employee1.getEmployeeId(), new Date(), hoursWorked1);
+
+    System.out.println("Nhập số giờ làm việc của nhân viên " + employee2.getName() + ":");
+    float hoursWorked2 = scanner.nextFloat();
+    timecardController.addTimecard(employee2.getEmployeeId(), new Date(), hoursWorked2);
+
+    // Xem thẻ chấm công
+    System.out.println("\nDanh sách thẻ chấm công của " + employee1.getName() + ":");
+    timecardController.viewTimecards(employee1.getEmployeeId());
+
+    System.out.println("\nDanh sách thẻ chấm công của " + employee2.getName() + ":");
+    timecardController.viewTimecards(employee2.getEmployeeId());
+
+    scanner.close();
+}
+}
