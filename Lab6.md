@@ -34,7 +34,7 @@
   + LoggedIn: Người dùng đã đăng nhập.
 - Biểu đồ trạng thái:
 
-  [].(https://www.planttext.com/plantuml/png/UhzxlqDnIM9HIMbk3bUqLgo2hgwTWaz-UdfgYdzf2HUSXIJkcQTWfP2JdvwPfw49LU2PXweFeY2_j4H3ayiXDIy5P3W0003__mC0)
+  ![](https://www.planttext.com/plantuml/png/UhzxlqDnIM9HIMbk3bUqLgo2hgwTWaz-UdfgYdzf2HUSXIJkcQTWfP2JdvwPfw49LU2PXweFeY2_j4H3ayiXDIy5P3W0003__mC0)
 
  ## Lớp Timecard
 - Trạng thái:
@@ -42,7 +42,7 @@
   + Updated: Thẻ chấm công được cập nhật.
 - Biểu đồ trạng thái:
 
-[].(https://www.planttext.com/plantuml/png/UhzxlqDnIM9HIMbk3bUqLgo2hgwTWdDHQc99QWeNb0QBXHQaWDbM2gLWbaT-QL6nXYQNGsfU2aWl0000__y30000)
+ ![](https://www.planttext.com/plantuml/png/UhzxlqDnIM9HIMbk3bUqLgo2hgwTWdDHQc99QWeNb0QBXHQaWDbM2gLWbaT-QL6nXYQNGsfU2aWl0000__y30000)
 
 ## Lớp Paycheck
 - Trạng thái:
@@ -50,7 +50,7 @@
   + Processed: Phiếu lương đã được gửi qua ngân hàng hoặc in.
 - Biểu đồ trạng thái:
 
-[].(https://www.planttext.com/plantuml/png/UhzxlqDnIM9HIMbk3bUqLgo2hgwTWdjgNcfHOabg2XUS1HOFACfFJYqkJarHi58eWB0rDBaSKlDIGBe10000__y30000)
+ ![](https://www.planttext.com/plantuml/png/UhzxlqDnIM9HIMbk3bUqLgo2hgwTWdjgNcfHOabg2XUS1HOFACfFJYqkJarHi58eWB0rDBaSKlDIGBe10000__y30000)
 
 # 3. Xác định các thuộc tính
 ## Lớp User
@@ -87,4 +87,4 @@
   + Paycheck - BankTransaction: Một phiếu lương có thể dẫn đến một giao dịch ngân hàng.
 5. Biểu đồ lớp chi tiết với các phụ thuộc và quan hệ kết hợp
 
-[].(https://www.planttext.com/plantuml/png/f5HBQiCm4Dtx58DNCIGNqAA4afPqLqXArrDvY4LioMZ6AQ7qP5tqIBr2SIBBZkD2e4k_UVFcpKV--VfUig2NfYeJNI8pl31v-4W001RGCFcdNC56lB6x0MYneX5S8_Exy_aQkHY5l2ilsG3OI45MZ4QXMPVQSJ85RywLX3RvJ8Al3J4RPwCrFdzFkbEdBa8bxGc5Glgi3sUgqmn48LyPE-1c2WxEvBs7hQb8ey-Z2Gd0bGkgwj8TYQu2EGefMA5G00hNU7vrVa-vWiVIeLpuxahEhXNd0x7vX4wcek4WsTHjnhfbpYRvb-q-X9AntJ-xcZe7nqQCiwEzxqWwsHK9cfBRCGTAhFoCHrsGtiVATG1k7pHMhh4oDT9EV7Aa5scPYavwR_TezrkFbb6t_VMtq6F_SrbxfubvKECcfuCNSth3YyLTV3GAqW8vJU96ss2yvdCKAhJ74INkGK7gIPCv4AT9H5lAU1mAKl5cjoFFQR8acxU_bby0003__mC0)
+ ![](https://www.planttext.com/plantuml/png/f5HBQiCm4Dtx58DNCIGNqAA4afPqLqXArrDvY4LioMZ6AQ7qP5tqIBr2SIBBZkD2e4k_UVFcpKV--VfUig2NfYeJNI8pl31v-4W001RGCFcdNC56lB6x0MYneX5S8_Exy_aQkHY5l2ilsG3OI45MZ4QXMPVQSJ85RywLX3RvJ8Al3J4RPwCrFdzFkbEdBa8bxGc5Glgi3sUgqmn48LyPE-1c2WxEvBs7hQb8ey-Z2Gd0bGkgwj8TYQu2EGefMA5G00hNU7vrVa-vWiVIeLpuxahEhXNd0x7vX4wcek4WsTHjnhfbpYRvb-q-X9AntJ-xcZe7nqQCiwEzxqWwsHK9cfBRCGTAhFoCHrsGtiVATG1k7pHMhh4oDT9EV7Aa5scPYavwR_TezrkFbb6t_VMtq6F_SrbxfubvKECcfuCNSth3YyLTV3GAqW8vJU96ss2yvdCKAhJ74INkGK7gIPCv4AT9H5lAU1mAKl5cjoFFQR8acxU_bby0003__mC0)
