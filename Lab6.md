@@ -1,90 +1,75 @@
 # 1. Xác định các Operations
-## Lớp LoginController
-- Mô tả: Quản lý đăng nhập, đăng xuất.
+## Lớp LoginManager
+- Mô tả: Quản lý yêu cầu đăng nhập và đăng xuất từ người dùng.
 - Operations:
-  + login(username: String, password: String): Xác thực người dùng.
-  + logout(): Kết thúc phiên làm việc.
-## Lớp User
-- Mô tả: Đại diện cho người dùng trong hệ thống.
+  + signIn(username: String, password: String): Kiểm tra thông tin đăng nhập của người dùng.
+  + signOut(sessionId: String): Kết thúc phiên làm việc.
+## Lớp Authentication
+- Mô tả: Xử lý xác thực thông tin người dùng.
 - Operations:
-  + authenticate(password: String): boolean :Kiểm tra tính hợp lệ của mật khẩu.
-## Lớp TimecardController
-- Mô tả: Quản lý thông tin chấm công.
+  + validateCredentials(username: String, password: String): Xác minh thông tin đăng nhập.
+## Lớp AttendanceManager
+- Mô tả: Quản lý việc chấm công và sửa thông tin chấm công.
 - Operations:
-  + addTimecard(employeeId: String, date: Date, hoursWorked: Float): Thêm thông tin chấm công mới.
-  + updateTimecard(timecardId: String, hoursWorked: Float): Cập nhật số giờ làm việc.
-  + viewTimecards(employeeId: String): Lấy danh sách các thẻ chấm công của một nhân viên.
-## Lớp PayrollController
-- Mô tả: Điều phối quá trình tính lương.
+  + recordTime(employeeId: String, date: Date, hoursWorked: Float): Ghi nhận giờ làm việc.
+  + editTimecard(timecardId: String, hoursWorked: Float): Chỉnh sửa thông tin giờ làm việc.
+  + retrieveTimecards(employeeId: String): Lấy danh sách chấm công của một nhân viên.
+## Lớp PayrollProcessor
+- Mô tả: Điều phối quy trình tính lương.
 - Operations:
-  + runPayroll(): Thực hiện tính lương cho tất cả nhân viên.
-  + calculatePay(employee: Employee): Tính toán số tiền lương của một nhân viên.
-## Lớp Paycheck
-- Mô tả: Đại diện cho phiếu lương.
-- Operations:
-  + createPaycheck(employeeId: String, amount: Float): Tạo phiếu lương mới.
-## Lớp BankTransaction
-- Mô tả: Xử lý giao dịch ngân hàng.
-- Operations:
-  + processTransaction(employeeId: String, amount: Float): Thực hiện giao dịch chuyển tiền lương.
+  + initiatePayroll(): Bắt đầu quy trình trả lương.
+  + computeSalary(employee: Staff): Tính số tiền lương dựa trên thông tin nhân viên.
 # 2. Xác định các trạng thái
-## Lớp User
+## Lớp Authentication
 - Trạng thái:
-  + LoggedOut: Người dùng chưa đăng nhập.
-  + LoggedIn: Người dùng đã đăng nhập.
+  + Idle: Không có hoạt động.
+  + Authenticating: Đang xử lý xác thực thông tin.
+  + Authenticated: Xác thực thành công.
 - Biểu đồ trạng thái:
 
-  ![](https://www.planttext.com/plantuml/png/UhzxlqDnIM9HIMbk3bUqLgo2hgwTWaz-UdfgYdzf2HUSXIJkcQTWfP2JdvwPfw49LU2PXweFeY2_j4H3ayiXDIy5P3W0003__mC0)
-
- ## Lớp Timecard
+![](https://www.planttext.com/plantuml/png/UhzxlqDnIM9HIMbk3bUqLgo2hgwTWcTAJYeNY03p74jBCbBpIZAJ4qioyz8Lh1IACzFpFFCqDBdGPD0KfwQ0r9Oc9wSM5sDJ2hR0IY4jCJEdj2WLMKLg2h82a7N-fIKQcbmEgNaf87S20000__y30000)
+## Lớp AttendanceRecord
 - Trạng thái:
-  + Created: Thẻ chấm công mới được tạo.
-  + Updated: Thẻ chấm công được cập nhật.
+  + New: Bản ghi mới được tạo.
+  + Modified: Bản ghi được chỉnh sửa.
 - Biểu đồ trạng thái:
-
- ![](https://www.planttext.com/plantuml/png/UhzxlqDnIM9HIMbk3bUqLgo2hgwTWdDHQc99QWeNb0QBXHQaWDbM2gLWbaT-QL6nXYQNGsfU2aWl0000__y30000)
-
-## Lớp Paycheck
+    
+![](https://www.planttext.com/plantuml/png/UhzxlqDnIM9HIMbk3bUqLgo2hgwTWbzgEPTVQZcOxPkVafcMcPgYOAMGcf9P4fAPcvgSM9IYeSdba9gN0j850000__y30000)
+## Lớp SalaryPayment
 - Trạng thái:
-  + Generated: Phiếu lương được tạo.
-  + Processed: Phiếu lương đã được gửi qua ngân hàng hoặc in.
+  + Pending: Lương đang chờ xử lý.
+  + Completed: Lương đã được xử lý.
 - Biểu đồ trạng thái:
-
- ![](https://www.planttext.com/plantuml/png/UhzxlqDnIM9HIMbk3bUqLgo2hgwTWdjgNcfHOabg2XUS1HOFACfFJYqkJarHi58eWB0rDBaSKlDIGBe10000__y30000)
-
+  
+  ![](https://www.planttext.com/plantuml/png/UhzxlqDnIM9HIMbk3bUqLgo2hgwTGa1gNafcNZeNb0QBEUVd5kIabgIcA5Wf51Jb9wSM5mSaLkQcvfLeQ78vfEQbW0m00000__y30000)
 # 3. Xác định các thuộc tính
-## Lớp User
-- Thuộc tính:
-  + userId: String
-  + username: String
-  + passwordHash: String
+## Lớp Staff
+  + staffId: String
+  + fullName: String
   + role: String
-## Lớp Timecard
-- Thuộc tính:
-  + timecardId: String
+  + hourlyRate: Float
+## Lớp AttendanceRecord
+  + recordId: String
   + employeeId: String
-  + date: Date
+  + workDate: Date
   + hoursWorked: Float
-## Lớp Paycheck
-- Thuộc tính:
-  + paycheckId: String
+## Lớp SalaryPayment
+  + paymentId: String
   + employeeId: String
   + amount: Float
-## Lớp BankTransaction
-- Thuộc tính:
+## Lớp BankService
   + transactionId: String
-  + employeeId: String
-  + amount: Float
+  + bankAccount: String
+  + paymentAmount: Float
 # 4. Xác định các phụ thuộc và quan hệ kết hợp
 - Phụ thuộc:
-  + LoginController: phụ thuộc vào User để xác thực thông tin đăng nhập.
-  + TimecardController: phụ thuộc vào Timecard và Employee để thêm và quản lý dữ liệu chấm công.
-  + PayrollController: phụ thuộc vào Paycheck và BankTransaction để thực hiện thanh toán.
+  + LoginManager: phụ thuộc vào Authentication để kiểm tra thông tin người dùng.
+  + AttendanceManager: phụ thuộc vào AttendanceRecord để lưu trữ thông tin chấm công.
+  + PayrollProcessor: phụ thuộc vào SalaryPayment để xử lý phiếu lương.
 - Quan hệ kết hợp:
-  + User - Session: Một người dùng có thể có một phiên làm việc.
-  + Employee - Timecard: Một nhân viên có thể có nhiều thẻ chấm công.
-  + Employee - Paycheck: Một nhân viên có thể nhận nhiều phiếu lương.
-  + Paycheck - BankTransaction: Một phiếu lương có thể dẫn đến một giao dịch ngân hàng.
-5. Biểu đồ lớp chi tiết với các phụ thuộc và quan hệ kết hợp
+  + Staff - AttendanceRecord: Một nhân viên có thể có nhiều bản ghi chấm công.
+  + Staff - SalaryPayment: Một nhân viên có thể nhận nhiều phiếu lương.
+  + SalaryPayment - BankService: Một phiếu lương có thể dẫn đến một giao dịch ngân hàng.
+5. Biểu đồ lớp với các phụ thuộc và quan hệ kết hợp
 
- ![](https://www.planttext.com/plantuml/png/f5HBQiCm4Dtx58DNCIGNqAA4afPqLqXArrDvY4LioMZ6AQ7qP5tqIBr2SIBBZkD2e4k_UVFcpKV--VfUig2NfYeJNI8pl31v-4W001RGCFcdNC56lB6x0MYneX5S8_Exy_aQkHY5l2ilsG3OI45MZ4QXMPVQSJ85RywLX3RvJ8Al3J4RPwCrFdzFkbEdBa8bxGc5Glgi3sUgqmn48LyPE-1c2WxEvBs7hQb8ey-Z2Gd0bGkgwj8TYQu2EGefMA5G00hNU7vrVa-vWiVIeLpuxahEhXNd0x7vX4wcek4WsTHjnhfbpYRvb-q-X9AntJ-xcZe7nqQCiwEzxqWwsHK9cfBRCGTAhFoCHrsGtiVATG1k7pHMhh4oDT9EV7Aa5scPYavwR_TezrkFbb6t_VMtq6F_SrbxfubvKECcfuCNSth3YyLTV3GAqW8vJU96ss2yvdCKAhJ74INkGK7gIPCv4AT9H5lAU1mAKl5cjoFFQR8acxU_bby0003__mC0)
+  ![](https://www.planttext.com/plantuml/png/b9HDZjim38NtFeNWbGCa5_1YC6a70mpGJeF9eckEJ3j2PCeWwGoCeYVheaVg5GexYd-IB5el38Yat_j4KVxpw_UZAB2sjK-i1n7p9LIElW91XMn-96Pun5NqGbaho0GrvcQlxAXQcmP4FW8NbyWgD-yXU0IQVVcjrKnGn0LwcLUUWYkIdqaqthPwG59dGLsWqVe4tXMW-9cnwDFWvVyuHeEzGbb6tOsHVZNXn6ZPUlywKuvX3luwT0Wj--uD57Fpx0DevArGdr31USbMuoVJ9bMH2Y2BRsW35oCE3yiR7gmR7ph4cyH7uEFJODw_PqpoFV0HYoMKPGIDbjcjvlfARdr7QPNVm4_Rsa77mViT1uiYOHeSHquTACQ2x7Bg4IlKJQku1m_SZLmz5PJbwhA5wG27kXrqDPAEdMlEwtzl7TIX9Lqsg3cJH-titlXy0ZhkaK_EukYj32HW-u6ziNa7EcwjFNijCf5uUuTZ42oHdrigXW6QOInkvcRpS7rZSfF25459a_F43wNNSvURz01YQg1kNhTiSMvIHelkD8WjKdtnl2EvIIzdBMdoY5JqlvI_0000__y30000)
